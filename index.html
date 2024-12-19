@@ -1,7 +1,7 @@
-<html><head><base href="." />
+<html><head><base href=".">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculadora de Bloques de Hormigón y Espuma necesarios</title>
+<title>Calculadora de Bloques de Hormig&#xf3;n y Espuma necesarios</title>
 <style>
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -21,11 +21,11 @@
         padding: 2.5rem;
         border-radius: 20px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        max-width: 1200px;
+        max-width: 800px;
         width: 95%;
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 3rem;
+        grid-template-columns: 1fr;
+        gap: 2rem;
         backdrop-filter: blur(10px);
     }
 
@@ -41,19 +41,17 @@
 
     .input-section {
         padding: 1.5rem;
-        border-right: 2px solid #e0e0e0;
+        border-bottom: 2px solid #e0e0e0;
         background: rgba(255, 255, 255, 0.5);
         border-radius: 15px;
-        order: 1;
-        display: flex;
-        flex-direction: column;
+        margin-bottom: 2rem;
     }
 
-    .results-section {
-        padding: 1.5rem;
-        background: rgba(255, 255, 255, 0.5);
-        border-radius: 15px;
-        order: 2;
+    .section-divider {
+        width: 100%;
+        height: 2px;
+        background: #e0e0e0;
+        margin: 2rem 0;
     }
 
     .input-group {
@@ -68,8 +66,9 @@
         font-size: 1.1rem;
     }
 
-    input {
-        width: 70%; 
+    input, button {
+        width: 100%;
+        max-width: 400px;
         padding: 1rem;
         border: 2px solid #dfe6e9;
         border-radius: 10px;
@@ -85,8 +84,6 @@
     }
 
     button {
-        width: 70%; 
-        padding: 1.2rem;
         background: linear-gradient(135deg, #6c5ce7 0%, #a367dc 100%);
         color: white;
         border: none;
@@ -175,6 +172,16 @@
         transform: scale(1.05);
     }
 
+    .pallet-info {
+        margin-top: 1rem;
+        padding: 1rem;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: 10px;
+        font-size: 1.1rem;
+        color: #2d3436;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
     .footer {
         margin-top: 2rem;
         text-align: center;
@@ -193,88 +200,15 @@
     .footer a:hover {
         text-decoration: underline;
     }
-
-    .pallet-info {
-        margin-top: 1rem;
-        padding: 1rem;
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        border-radius: 10px;
-        font-size: 1.1rem;
-        color: #2d3436;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    @media (max-width: 768px) {
-        body {
-            padding: 0.5rem;
-        }
-
-        .container {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-            padding: 1rem;
-            width: 100%;
-            margin: 0.5rem;
-        }
-        
-        .input-section {
-            border-right: none;
-            border-bottom: 2px solid #e0e0e0;
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .results-section {
-            padding: 1rem;
-        }
-
-        h1 {
-            font-size: 1.5rem;
-            padding: 0 1rem;
-            margin-bottom: 1rem;
-        }
-
-        input, button {
-            width: 100%;
-            font-size: 16px; /* Prevents iOS zoom on focus */
-        }
-
-        .block-visualization {
-            max-height: 300px;
-            margin: 1rem 0;
-        }
-
-        .calculation-results,
-        .result,
-        .total-budget,
-        .pallet-info {
-            margin: 1rem 0;
-            padding: 1rem;
-        }
-
-        .total-budget-amount {
-            font-size: 1.5rem;
-        }
-
-        .budget-breakdown {
-            font-size: 1.1rem;
-        }
-
-        .input-group {
-            margin-bottom: 1rem;
-        }
-
-        label {
-            font-size: 1rem;
-        }
-    }
 </style>
 </head>
 <body>
     <div class="container">
-        <h1>Calculadora de Bloques de Hormigón y Espuma necesarios</h1>
+        <h1>Calculadora de Bloques de Hormigón, Espuma y Volumen de Hormigón</h1>
         
+        <!-- Blocks and Foam Section -->
         <div class="input-section">
+            <h2>Cálculo de Bloques y Espuma</h2>
             <div class="input-group">
                 <label for="width">Ancho de la pared (metros):</label>
                 <input type="number" id="width" step="0.01" placeholder="Ingrese el ancho">
@@ -291,17 +225,35 @@
                 <label for="blockPrice">Precio por bloque (€):</label>
                 <input type="number" id="blockPrice" step="0.01" value="0.70">
             </div>
-            <button onclick="calculateBlocks()">Calcular</button>
+            <button onclick="calculateBlocks()">Calcular Bloques y Espuma</button>
             <div class="calculation-results" id="basicResults"></div>
-        </div>
-
-        <div class="results-section">
             <div class="result" id="result"></div>
             <div class="block-visualization">
                 <h3>Visualización de bloques:</h3>
                 <div class="block-grid" id="blockGrid"></div>
                 <div class="pallet-info" id="palletInfo"></div>
             </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- Concrete Section -->
+        <div class="input-section">
+            <h2>Cálculo de Volumen de Hormigón</h2>
+            <div class="input-group">
+                <label for="concrete-length">Largo para hormigón (metros):</label>
+                <input type="number" id="concrete-length" step="0.01" placeholder="Ingrese el largo">
+            </div>
+            <div class="input-group">
+                <label for="concrete-width">Ancho para hormigón (metros):</label>
+                <input type="number" id="concrete-width" step="0.01" placeholder="Ingrese el ancho">
+            </div>
+            <div class="input-group">
+                <label for="concrete-height">Alto para hormigón (metros):</label>
+                <input type="number" id="concrete-height" step="0.01" placeholder="Ingrese el alto">
+            </div>
+            <button onclick="calculateConcrete()">Calcular Hormigón</button>
+            <div class="calculation-results" id="concreteResults"></div>
         </div>
     </div>
 
@@ -311,67 +263,77 @@
 
     <script>
         function calculateBlocks() {
-            const blockLength = 0.4;
-            const blockHeight = 0.2;
-            const blocksPerFoam = 40;
-            const blocksPerPallet = 75;
-
-            const wallWidth = parseFloat(document.getElementById('width').value);
-            const wallHeight = parseFloat(document.getElementById('height').value);
-            const foamPrice = parseFloat(document.getElementById('foamPrice').value) || 9.00;
-            const blockPrice = parseFloat(document.getElementById('blockPrice').value) || 0.70;
-
-            if (isNaN(wallWidth) || isNaN(wallHeight)) {
-                document.getElementById('basicResults').innerHTML = 'Por favor, ingrese valores válidos';
+            const width = parseFloat(document.getElementById('width').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const foamPrice = parseFloat(document.getElementById('foamPrice').value);
+            const blockPrice = parseFloat(document.getElementById('blockPrice').value);
+            if (isNaN(width) || isNaN(height)) {
+                document.getElementById('result').innerHTML = 'Por favor, ingrese valores válidos';
                 return;
             }
-
-            const blocksPerRow = Math.ceil(wallWidth / blockLength);
-            const rowsNeeded = Math.ceil(wallHeight / blockHeight);
-            const totalBlocks = blocksPerRow * rowsNeeded;
-            const totalBlocksWithExtra = Math.ceil(totalBlocks * 1.1);
-            const foamBottles = Math.ceil(totalBlocksWithExtra / blocksPerFoam);
-            const palletsNeeded = totalBlocksWithExtra / blocksPerPallet;
-
-            const totalBlocksCost = totalBlocksWithExtra * blockPrice;
+            const blockWidth = 0.5;
+            const blockHeight = 0.2;
+            const blocksPerRow = Math.ceil(width / blockWidth);
+            const numRows = Math.ceil(height / blockHeight);
+            const totalBlocks = blocksPerRow * numRows;
+            const extraBlocks = Math.ceil(totalBlocks * 1.1);
+            const foamBottles = Math.ceil(totalBlocks / 25);
+            const totalBlockCost = extraBlocks * blockPrice;
             const totalFoamCost = foamBottles * foamPrice;
-            const totalBudget = totalBlocksCost + totalFoamCost;
-
+            const totalBudget = totalBlockCost + totalFoamCost;
             document.getElementById('basicResults').innerHTML = `
                 <strong>Resultados:</strong><br>
                 Bloques por fila: ${blocksPerRow}<br>
-                Filas necesarias: ${rowsNeeded}<br>
+                Filas necesarias: ${numRows}<br>
                 Total de bloques necesarios: ${totalBlocks}<br>
-                (Se recomienda agregar un 10% extra para desperdicios: ${totalBlocksWithExtra} bloques)<br>
+                (Se recomienda agregar un 10% extra: ${extraBlocks} bloques)<br>
                 Botes de espuma necesarios: ${foamBottles}
             `;
-
             document.getElementById('result').innerHTML = `
                 <div class="total-budget">
                     <div class="total-budget-amount">Presupuesto Total: ${totalBudget.toFixed(2)}€</div>
                     <div class="budget-breakdown">
                         Desglose:<br>
-                        - Bloques: ${totalBlocksCost.toFixed(2)}€<br>
+                        - Bloques: ${totalBlockCost.toFixed(2)}€<br>
                         - Espuma: ${totalFoamCost.toFixed(2)}€
                     </div>
                 </div>
             `;
-
-            document.getElementById('palletInfo').innerHTML = `
-                Número de palets necesarios: ${palletsNeeded.toFixed(2)} 
-                ${palletsNeeded === 1 ? 'palet' : 'palets'} 
-                (${blocksPerPallet} bloques por palet)
-            `;
-
-            const grid = document.getElementById('blockGrid');
-            grid.innerHTML = '';
-            grid.style.gridTemplateColumns = `repeat(${blocksPerRow}, 1fr)`;
-
-            for (let i = 0; i < totalBlocks; i++) {
+            const blockGrid = document.getElementById('blockGrid');
+            blockGrid.style.gridTemplateColumns = `repeat(${blocksPerRow}, 1fr)`;
+            blockGrid.innerHTML = '';
+            for (let i = 0; i < Math.min(totalBlocks, 100); i++) {
                 const block = document.createElement('div');
                 block.className = 'block';
-                grid.appendChild(block);
+                blockGrid.appendChild(block);
             }
+            const pallets = extraBlocks / 75;
+            document.getElementById('palletInfo').innerHTML = `
+                Número de palets necesarios: ${pallets.toFixed(4)} 
+                (75 bloques por palet)
+            `;
+        }
+        function calculateConcrete() {
+            const length = parseFloat(document.getElementById('concrete-length').value);
+            const width = parseFloat(document.getElementById('concrete-width').value);
+            const height = parseFloat(document.getElementById('concrete-height').value);
+            const pricePerCubicMeter = 95;
+            if (isNaN(length) || isNaN(width) || isNaN(height)) {
+                document.getElementById('concreteResults').innerHTML = 'Por favor, ingrese valores válidos';
+                return;
+            }
+            const volumeCubicMeters = length * width * height;
+            const totalPrice = volumeCubicMeters * pricePerCubicMeter;
+            document.getElementById('concreteResults').innerHTML = `
+                <strong>Resultados Hormigón:</strong><br>
+                Volumen: ${volumeCubicMeters.toFixed(2)} metros cúbicos<br>
+                <div class="total-budget">
+                    <div class="total-budget-amount">Presupuesto Total: ${totalPrice.toFixed(2)}€</div>
+                    <div class="budget-breakdown">
+                        (${pricePerCubicMeter}€/m³)
+                    </div>
+                </div>
+            `;
         }
     </script>
 </body></html>
