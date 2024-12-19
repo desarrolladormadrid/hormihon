@@ -1,5 +1,6 @@
 <html><head><base href="." />
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calculadora de Bloques de Hormigón y Espuma necesarios</title>
 <style>
     body {
@@ -12,6 +13,7 @@
         margin: 0;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: #2d3436;
+        padding: 1rem;
     }
 
     .container {
@@ -107,6 +109,8 @@
         border-radius: 10px;
         margin-top: 1rem;
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        font-size: 1.1rem;
+        line-height: 1.6;
     }
 
     .result {
@@ -201,16 +205,23 @@
     }
 
     @media (max-width: 768px) {
+        body {
+            padding: 0.5rem;
+        }
+
         .container {
             grid-template-columns: 1fr;
-            gap: 2rem;
-            padding: 1.5rem;
+            gap: 1.5rem;
+            padding: 1rem;
+            width: 100%;
+            margin: 0.5rem;
         }
         
         .input-section {
             border-right: none;
             border-bottom: 2px solid #e0e0e0;
             padding: 1rem;
+            margin-bottom: 1rem;
         }
 
         .results-section {
@@ -218,15 +229,43 @@
         }
 
         h1 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
+            padding: 0 1rem;
+            margin-bottom: 1rem;
         }
 
         input, button {
             width: 100%;
+            font-size: 16px; /* Prevents iOS zoom on focus */
         }
 
         .block-visualization {
-            max-height: 400px;
+            max-height: 300px;
+            margin: 1rem 0;
+        }
+
+        .calculation-results,
+        .result,
+        .total-budget,
+        .pallet-info {
+            margin: 1rem 0;
+            padding: 1rem;
+        }
+
+        .total-budget-amount {
+            font-size: 1.5rem;
+        }
+
+        .budget-breakdown {
+            font-size: 1.1rem;
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            font-size: 1rem;
         }
     }
 </style>
